@@ -8,7 +8,7 @@ NeRF realize by Pytorch
 ## how to start?  
 1. Download lego data from [datasets](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1)  
 2. put 'lego' data directory into data/train_data/ directory  
-3. linux command  
+3. start command  
 ```
 python main.py
 ```
