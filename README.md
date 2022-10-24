@@ -1,17 +1,18 @@
 # nerfPytorch
 NeRF realize by Pytorch  
 ## content  
-1.noval 'lego' view synthesis  
-2.positional encoding by hash ecoding or freq coding  
-3.multi gpu realize  
+1. noval 'lego' view synthesis  
+2. positional encoding by hash ecoding or freq coding  
+3. multi gpu realize  
 
 ## how to start?  
-1. download lego data 
-2. linux command  
+1. Download lego data from [datasets](https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1](https://drive.google.com/drive/folders/1JDdLGDruGNXWnM1eqY1FNL9PlStjaKWi)  
+2. put 'lego' data directory into data/train_data/ directory  
+3. linux command  
 ```
 python main.py
 ```
-3. parameters
+4. parameters
 ```
 parser.add_argument("--basedir", type=str, default=currentdir,
                         help='where to store ckpts and logs')
