@@ -1,4 +1,4 @@
-# nerfPytorch
+# nerfPytorch (multi GPU)
 NeRF realize by Pytorch  
 ## content  
 1. noval 'lego' view synthesis  
