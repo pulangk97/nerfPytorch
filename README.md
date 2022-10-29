@@ -1,5 +1,5 @@
 # nerfPytorch (multi GPU)
-NeRF realize by Pytorch  
+NeRF realized by Pytorch  
 ## content  
 1. noval view 'lego' synthesis  
 2. positional encoding by hash ecoding or freq encoding  
