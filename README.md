@@ -76,7 +76,7 @@ x_{w} \\\\
 y_{w} \\\\
 z_{w} \\\\
 1
-\end{array}\right]\tag{3}$$相机坐标系采用openGL中定义坐标，如图。  
+\end{array}\right]\tag{3}$$相机坐标系采用openGL中定义坐标，如图([openGl]([https://drive.google.com/drive/folders/128yBriW1IG_3NJ5Rp7APSTZsJqdJdfc1](http://www.songho.ca/opengl/gl_projectionmatrix.html)))。  
 ![openGL](2.png)  
 根据相机坐标系，相机高宽，以及小孔成像等效的焦距，能够计算出每个像素对应的采样光线矢量的原点位置$\vec o$以及光线方向$\vec d$。
 ```
