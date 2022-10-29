@@ -55,9 +55,7 @@ NeRF模型对观测物体，照明条件做了一定的假设，认为观测物�
 ## Method
 ### 成像模型
 ![NeRF](1.png)
-整个成像模型可以表达为式(2):$$C(\mathbf{r})=\int_{t_{n}}^{t_{f}} T(t) \sigma(\mathbf{r}(t)) \mathbf{c}(\mathbf{r}(t), \mathbf{d}) d t, \text { where } T(t)=\exp \left(-\int_{t_{n}}^{t} \sigma(\mathbf{r}(s)) d s\right) \tag{2} $$  离散形式表达为(3):
-$$\hat{C}(\mathbf{r})=\sum_{i=1}^{N} T_{i}\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right) \mathbf{c}_{i} \tag{3}$$  
-$\left(1-\exp \left(-\sigma_{i} \delta_{i}\right)\right)$代表辐射率，这两项与体密度$\sigma$有关。实现过程每个像素的物空间等效为一条光线(实际上这种在理想直线上采样的方式会导致高频信息混叠，后续[Mip-NeRF](https://jonbarron.info/mipnerf/)的工作则针对这一问题将物空间等效为三维高斯分布)，对于每个像素都能够根据小孔成像模型映射为空间一条光线，在这条光线上均匀采样一定数目的点(粗采样)，将所有采样点输入到MLP中映射为体密度和颜色，之后利用上述公式计算出该像素采集到的RGB信号，之后与gt做loss进行优化。
+整个成像模型可以表达为式(2):$$C(\mathbf{r})=\int_{t_{n}}^{t_{f}} T(t) \sigma(\mathbf{r}(t)) \mathbf{c}(\mathbf{r}(t), \mathbf{d}) d t, \text { where } T(t)=\exp \left(-\int_{t_{n}}^{t} \sigma(\mathbf{r}(s)) d s\right) \tag{2} $$  实现过程每个像素的物空间等效为一条光线(实际上这种在理想直线上采样的方式会导致高频信息混叠，后续[Mip-NeRF](https://jonbarron.info/mipnerf/)的工作则针对这一问题将物空间等效为三维高斯分布)，对于每个像素都能够根据小孔成像模型映射为空间一条光线，在这条光线上均匀采样一定数目的点(粗采样)，将所有采样点输入到MLP中映射为体密度和颜色，之后利用上述公式计算出该像素采集到的RGB信号，之后与gt做loss进行优化。
 **这种小孔成像模型近似的可行之处在于认为在拍摄场景时景深足够大，或者说场景内某点的离焦散斑完全打在对应像素内，使得相机内某像素采集到的完全是其对应自由空间光线上的辐射量**，通过利用神经网络对三维空间信息进行隐式表征，结合成像模型能够得到对应相机参数下的视图的估计，之后梯度下降法完成优化整个场景的隐式表达。
 当然对于存在离焦模糊的情况，也就是当场景内某点的离焦散斑不仅达到单个像素内时，会造成三维场景的体密度和颜色估计不准确（**根据NeRF模型，只有当一个像素采集的信号完全是对应光线上的辐射信号时，三维场景估计最准确，但是如果存在离焦噪声，则同样会导致场景体密度和颜色发生偏差**），此时需要改进成像模型，如下图，参考文章 [DoF-NeRF: Depth-of-Field Meets Neural Radiance Fields]( https://github.com/zijinwuzijin/DoF-NeRF)
 
